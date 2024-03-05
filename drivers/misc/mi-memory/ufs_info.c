@@ -7,7 +7,7 @@
 #include <scsi/scsi_common.h>
 #include <asm/unaligned.h>
 #include "memory_debugfs.h"
-//#include "ufs-mediatek.h"
+#include "ufs-mediatek.h"
 #include "ufs_info.h"
 
 
@@ -71,8 +71,7 @@ static int ufs_read_string_desc(struct ufs_hba *hba, u8 desc_index, u8 **buf, bo
 	if (!uc_str)
 		return -ENOMEM;
 
-	ret = ufshcd_read_desc_param_sel(hba, QUERY_DESC_IDN_STRING, desc_index, 0, 0,
-				     (u8 *)uc_str, QUERY_DESC_MAX_SIZE);
+	ret = ufshcd_read_desc_param_sel(hba, QUERY_DESC_IDN_STRING, desc_index, 0, 0, (u8 *)uc_str, QUERY_DESC_MAX_SIZE);
 	if (ret < 0) {
 		dev_err(hba->dev, "Reading String Desc failed after %d retries. err = %d\n",
 			QUERY_REQ_RETRIES, ret);
